@@ -1,6 +1,7 @@
 
 import React, {useState, useEffect} from 'react';
 import { Text, View, StyleSheet, Button, Pressable } from 'react-native';
+import ToggleButtons from '../../components/toggleButtons';
 
 
 export default function Genres({navigation}){
@@ -58,20 +59,13 @@ export default function Genres({navigation}){
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Genre Selection Screen</Text>
-            <View style={styles.btnContainer}>
-            {genresData.map((item, index) => {
-                return(
-                <Pressable
-                    style={{width: 130}}
-                    key={index}
-                    onPressIn={() => handlePress(item.id)}>
-                <Text
-                    style={(genres.includes(item.id)) ? {...styles.button, ...styles.buttonSelected} : styles.button}>
-                    {item.type}
-                </Text>
-                </Pressable>
-            )})}
-            </View>
+          
+            <ToggleButtons 
+                data={genresData} 
+                state={genres} 
+                handlePress={handlePress} 
+            />
+        
             <Button
                 title={'Next'}
                 color={'red'}
@@ -89,27 +83,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#191932'
     },
-    btnContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        flexWrap: 'wrap'
-    },
-    button: {
-        paddingVertical: 15,
-        marginVertical: 10,
-        marginHorizontal: 5,
-        borderWidth: 2,
-        borderRadius: 15,
-        borderColor: '#fff',
-        color: 'white',
-        textAlign: 'center',
-        fontSize: 13
-    },
-    buttonSelected: {
-        borderColor: 'red'
-    },
     title: {
         fontSize: 40
     }
 })
+
+
+
+// {genresData.map((item, index) => {
+//     return(
+//     <Pressable
+//         style={{width: 130}}
+//         key={index}
+//         onPressIn={() => handlePress(item.id)}>
+//     <Text
+//         style={(genres.includes(item.id)) ? {...styles.button, ...styles.buttonSelected} : styles.button}>
+//         {item.type}
+//     </Text>
+//     </Pressable>
+// )})}

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, Button, Pressable } from 'react-native';
+import ToggleButtons from '../../components/toggleButtons';
 
 export default function Providers({navigation, route}) {
 
@@ -37,22 +38,11 @@ export default function Providers({navigation, route}) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Which streaming service are you using?</Text>
-            <View style={styles.btnContainer}>
-                {providerData.map((item, index) => {
-                    return (
-                        <Pressable
-                            key={index}
-                            style={{width: 115}}
-                            onPressIn={() => handlePress(item.id)}>
-                            <Text
-                                style={(providers.includes(item.id)) ? {...styles.button, ...styles.buttonSelected} : styles.button}>
-                                {item.type}
-                            </Text>
-                        </Pressable>
-                    )
-                })}
-            </View>
-    
+            <ToggleButtons 
+                data={providerData} 
+                state={providers} 
+                handlePress={handlePress} 
+            />
             <Button
                 title='Find Movies'
                 onPress={() => navigation.navigate('MovieDisplay', {
@@ -80,19 +70,5 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         flexWrap: 'wrap'
-    },
-    button: {
-        paddingVertical: 15,
-        marginVertical: 10,
-        marginHorizontal: 5,
-        borderWidth: 2,
-        borderRadius: 15,
-        borderColor: '#fff',
-        color: 'white',
-        textAlign: 'center',
-        fontSize: 13
-    },
-    buttonSelected: {
-        borderColor: 'red'
-    },
+    }
 })
