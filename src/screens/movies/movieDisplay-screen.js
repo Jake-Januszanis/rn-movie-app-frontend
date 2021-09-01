@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { Text, View, StyleSheet, SafeAreaView, ScrollView, Image, StatusBar, Pressable } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
+import ReadMoreBtn from '../../components/readMoreBtn';
 
 import Constants from 'expo-constants'
 
 export default function MovieDisplay({navigation, route}) {
 
-    const [state, setState] = useState(1);
+    const [state, setState] = useState(0);
     const [linesOfText, setLinesOfText] = useState(3)
     // const [data, setData] = useState();
     const [isLoaded, setIsLoaded] = useState(true)
@@ -140,13 +141,7 @@ export default function MovieDisplay({navigation, route}) {
                         style={styles.overview}>
                         {data.results[state].overview}
                     </Text>
-                    <Pressable
-                        onPressIn={() => setLinesOfText(0)}>
-                            <Text
-                                style={styles.readMoreBtn}>
-                                Read more
-                            </Text>
-                    </Pressable>
+                    <ReadMoreBtn linesOfText={linesOfText} setLinesOfText={setLinesOfText}/>
                 
                 </View>
             </ScrollView>
@@ -216,12 +211,5 @@ const styles = StyleSheet.create({
         fontSize: 35,
         paddingLeft: 7
     },
-    readMoreBtn: {
-        color: 'red',
-        fontSize: 17,
-        textAlign: 'right',
-        paddingRight: 20
-
-    }
 })
 
