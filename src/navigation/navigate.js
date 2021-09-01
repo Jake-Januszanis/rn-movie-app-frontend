@@ -33,6 +33,9 @@ export default function App() {
           <Stack.Screen
             name='MovieDisplay'
             component={MovieDisplay}
+            options={{
+              headerShown: false
+            }}
           /> 
         </Stack.Navigator>
       </NavigationContainer>

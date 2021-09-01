@@ -87,18 +87,3 @@ const styles = StyleSheet.create({
         fontSize: 40
     }
 })
-
-
-
-// {genresData.map((item, index) => {
-//     return(
-//     <Pressable
-//         style={{width: 130}}
-//         key={index}
-//         onPressIn={() => handlePress(item.id)}>
-//     <Text
-//         style={(genres.includes(item.id)) ? {...styles.button, ...styles.buttonSelected} : styles.button}>
-//         {item.type}
-//     </Text>
-//     </Pressable>
-// )})}

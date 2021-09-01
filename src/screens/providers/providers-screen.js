@@ -12,7 +12,7 @@ export default function Providers({navigation, route}) {
     
     const providerData = [
         {type: 'Netflix', id: 8},
-        {type: 'Amazon', id: 119},
+        {type: 'Amazon', id: 9},
         {type: 'Disney', id: 337},
         {type: 'HBO', id: 118},
         {type: 'HBO Max', id: 384},
@@ -65,10 +65,4 @@ const styles = StyleSheet.create({
         fontSize: 40,
         textAlign: 'center'
     },
-    btnContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        flexWrap: 'wrap'
-    }
 })
