@@ -111,10 +111,10 @@ export default function MovieDisplay({navigation, route}) {
 
                             <View style={styles.bottomContainer}>
 
-                                <View style={{...styles.subContainers, justifyContent: 'space-between'}}>
+                                {/* <View style={{...styles.subContainers, justifyContent: 'space-between'}}>
                                     <PreviousBtn state={state} setState={setState}/>
                                     <NextBtn state={state} setState={setState}/>
-                                </View>
+                                </View> */}
 
                                 <View>
                                     <Text style={styles.largeText}>{data.results[state].title}</Text>
