@@ -22,10 +22,10 @@ export default function ReadMoreBtn({linesOfText, setLinesOfText}) {
 
 const styles = StyleSheet.create({
     readMoreBtn: {
-        color: 'red',
-        fontSize: 17,
+        color: '#E94057',
+        fontSize: 20,
         textAlign: 'right',
-        paddingRight: 20
+        paddingRight: 10
 
     }
 })

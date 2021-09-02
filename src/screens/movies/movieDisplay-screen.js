@@ -98,61 +98,68 @@ export default function MovieDisplay({navigation, route}) {
         <Text>Loading Please Wait</Text>
         :
         <SafeAreaView style={styles.container}>
-        <StatusBar></StatusBar>
             <ScrollView
                 style={styles.scrollview}
                 contentContainerStyle={{flexGrow: 1}}>
-                <View>
-                <Image
-                    source={{uri: `https://image.tmdb.org/t/p/original${data.results[state].poster_path}`}}
-                    style={styles.poster}
-                    resizeMode='cover'
-                />
-                <View style={styles.btnContainer}>
-                <PreviousBtn state={state} setState={setState}/>
-                <NextBtn state={state} setState={setState}/>
-                </View>
-                <View style={styles.subContainers}>
-                <Text 
-                    style={styles.title}>
-                    {data.results[state].title}
-                </Text>
-                <LinearGradient
-                    colors={['#8A2387', '#E94057', '#F27121' ]}
-                    style={styles.year}>
-                <Text style={{color: '#fff', fontSize: 22}}>
-                    {data.results[state].release_date.slice(0,4)}
-                </Text>
-                </LinearGradient>
-                </View>
+                    <Image
+                        source={{uri: `https://image.tmdb.org/t/p/original${data.results[state].poster_path}`}}
+                        style={styles.mainImage}
+                        resizeMode='cover'
+                    />
+                        <LinearGradient
+                            colors={['#0f0c29', '#302b63', '#24243e']}>
 
-                <View style={styles.subContainers}>
-                    {data.results[state].genre_ids.splice(0,3).map((item, index) => {
-                        const genre = genresData.find(obj => obj.id === item);
-                        return <Text key={index} style={styles.genres}>{genre.type}</Text>
-                    })}
-                </View>
-                <View style={styles.subContainers}>
-                <AntDesign 
-                    name='star'
-                    size={30} 
-                    color='#e2c84d' 
-                />
-                    <Text 
-                        style={styles.rating}>
-                        {data.results[state].vote_average}
-                    </Text>
-                </View>
+                            <View style={styles.bottomContainer}>
 
-                    <Text style={styles.description}>Summary</Text>
-                    <Text 
-                        numberOfLines={linesOfText}
-                        style={styles.overview}>
-                        {data.results[state].overview}
-                    </Text>
-                    <ReadMoreBtn linesOfText={linesOfText} setLinesOfText={setLinesOfText}/>
-                
-                </View>
+                                <View style={{...styles.subContainers, justifyContent: 'space-between'}}>
+                                    <PreviousBtn state={state} setState={setState}/>
+                                    <NextBtn state={state} setState={setState}/>
+                                </View>
+
+                                <View>
+                                    <Text style={styles.largeText}>{data.results[state].title}</Text>
+                                    <LinearGradient
+                                        colors={['#8A2387', '#E94057', '#F27121' ]}
+                                        style={styles.yearBubble}>
+                                        <Text style={styles.mediumText}>
+                                            {data.results[state].release_date.slice(0,4)}
+                                        </Text>
+                                    </LinearGradient>
+                                </View>
+
+                                <View style={styles.subContainers}>
+                                    {data.results[state].genre_ids.splice(0,3).map((item, index) => {
+                                        const genre = genresData.find(obj => obj.id === item);
+                                        return <Text key={index} style={styles.genres}>
+                                                    {genre.type}
+                                                </Text>
+                                    })}
+                                </View>
+
+                                <View style={styles.subContainers}>
+                                    <AntDesign 
+                                        name='star'
+                                        size={30} 
+                                        color='#FFD200'
+                                        style={{paddingRight: 5, paddingTop: 5}}/>
+                                    <Text
+                                        style={styles.rating}>
+                                        {data.results[state].vote_average}
+                                    </Text>
+                                </View>
+
+                                <View>
+                                    <Text style={{...styles.mediumText, textAlign: 'left'}}>Plot:</Text>
+                                    <Text 
+                                        numberOfLines={linesOfText}
+                                        style={styles.descriptionText}>
+                                        {data.results[state].overview}
+                                    </Text>
+                                    <ReadMoreBtn linesOfText={linesOfText} setLinesOfText={setLinesOfText} />
+                                </View>
+
+                            </View>
+                        </LinearGradient>
             </ScrollView>
         </SafeAreaView>
     )
@@ -161,68 +168,58 @@ export default function MovieDisplay({navigation, route}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // marginTop: Constants.statusBarHeight
     },
     scrollview: {
         backgroundColor: '#070d2d',
     },
-    poster: {
+    mainImage: {
         height: 450,
-    }, 
-    btnContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+    },
+    bottomContainer: {
+        marginHorizontal: 15,
+        paddingBottom: 20
     },
     subContainers: {
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        alignItems: 'center',
-        marginTop: 10,
-        paddingLeft: 8,
-    },  
-    title: {
-        color: '#ffffff',
-        fontSize: 38,
-    },
-    year: {
-        fontSize: 20,
-        textAlign: 'center',
-        color: '#fff',
-        borderWidth: 1,
-        borderRadius: 20,
-        paddingHorizontal: 15,
-        paddingVertical: 2,
+        marginTop: 5,
 
     },
-    genresContainer: {
-        
+    largeText: {
+        fontSize: 38,
+        color: '#fff'
     },
-    description: {
-        color: '#ffffff',
-        fontSize: 20,
-        paddingLeft: 13,
-        paddingBottom: 5
+    mediumText: {
+        fontSize: 22,
+        color: '#fff',
+        textAlign: 'center',
     },
-    overview: {
+
+    yearBubble: {
+        borderRadius: 20,
+        marginVertical: 3,
+        paddingVertical: 2,
+        width: 90
+    },
+    descriptionText: {
         fontSize: 15,
         color: '#fff',
-        marginHorizontal: 13,
     },
     genres: {
-        color: 'gray',
+        color: '#F27121',
         fontSize: 15,
         textAlign: 'center',
-        paddingHorizontal: 5,
+        paddingHorizontal: 8,
         marginHorizontal: 6,
+        marginTop: 8,
         borderWidth: 1,
-        borderColor: 'gray'
+        borderColor: '#E94057',
+        borderRadius: 5
     },
     rating: {
         color: '#fff',
-        fontSize: 35,
-        paddingLeft: 7
+        fontSize: 30,
     },
 })
 
