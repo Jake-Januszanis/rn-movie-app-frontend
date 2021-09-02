@@ -3,7 +3,9 @@ import { Text, View, StyleSheet, SafeAreaView, ScrollView, Image, StatusBar, Pre
 import { AntDesign } from '@expo/vector-icons'
 import ReadMoreBtn from '../../components/readMoreBtn';
 
-import Constants from 'expo-constants'
+import NextBtn from '../../components/nextBtn';
+import PreviousBtn from '../../components/previousBtn';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function MovieDisplay({navigation, route}) {
 
@@ -106,15 +108,22 @@ export default function MovieDisplay({navigation, route}) {
                     style={styles.poster}
                     resizeMode='cover'
                 />
+                <View style={styles.btnContainer}>
+                <PreviousBtn state={state} setState={setState}/>
+                <NextBtn state={state} setState={setState}/>
+                </View>
                 <View style={styles.subContainers}>
                 <Text 
                     style={styles.title}>
                     {data.results[state].title}
                 </Text>
-                <Text 
+                <LinearGradient
+                    colors={['#8A2387', '#E94057', '#F27121' ]}
                     style={styles.year}>
+                <Text style={{color: '#fff', fontSize: 22}}>
                     {data.results[state].release_date.slice(0,4)}
                 </Text>
+                </LinearGradient>
                 </View>
 
                 <View style={styles.subContainers}>
@@ -155,32 +164,36 @@ const styles = StyleSheet.create({
         // marginTop: Constants.statusBarHeight
     },
     scrollview: {
-        backgroundColor: '#222',
+        backgroundColor: '#070d2d',
     },
     poster: {
-        height: 450
-    },  
+        height: 450,
+    }, 
+    btnContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
     subContainers: {
         display: 'flex',
         flexDirection: 'row',
+        flexWrap: 'wrap',
         alignItems: 'center',
         marginTop: 10,
         paddingLeft: 8,
     },  
     title: {
         color: '#ffffff',
-        fontSize: 30,
+        fontSize: 38,
     },
     year: {
         fontSize: 20,
         textAlign: 'center',
         color: '#fff',
-        marginLeft: 20,
         borderWidth: 1,
         borderRadius: 20,
         paddingHorizontal: 15,
         paddingVertical: 2,
-        backgroundColor: '#556ee6'
 
     },
     genresContainer: {
