@@ -50,13 +50,14 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         flex: 1,
-        justifyContent: 'space-evenly',
+        justifyContent: 'flex-end',
         alignItems: 'center'
     },
     title: {
         fontSize: 80,
         fontFamily: 'Lato_900Black',
-        color: '#F27121'
+        color: '#F27121',
+        paddingBottom: 10
     },
     subTitle: {
         fontSize: 22,

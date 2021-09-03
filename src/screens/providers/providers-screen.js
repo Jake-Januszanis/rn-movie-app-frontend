@@ -1,8 +1,9 @@
 
 
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, Button, Pressable } from 'react-native';
+import { Text, View, StyleSheet, Pressable } from 'react-native';
 import ToggleButtons from '../../components/toggleButtons';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Providers({navigation, route}) {
 
@@ -36,21 +37,30 @@ export default function Providers({navigation, route}) {
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Which streaming service are you using?</Text>
+        <LinearGradient
+            style={styles.container}
+            colors={['#0f0c29', '#24243e']}>
+        <View>
+            <Text style={styles.title}>Streaming Services</Text>
             <ToggleButtons 
                 data={providerData} 
                 state={providers} 
                 handlePress={handlePress} 
             />
-            <Button
-                title='Find Movies'
-                onPress={() => navigation.navigate('MovieDisplay', {
+            <LinearGradient
+                colors={['#8A2387', '#E94057', '#F27121' ]}
+                style={styles.nextButton}
+                >
+            <Pressable
+                    onPressIn={() => navigation.navigate('MovieDisplay', {
                     genres: genres,
                     providers: providers
-                })}
-            />
+                })}>
+                <Text style={styles.nextButtonText}>Find Movies</Text>
+            </Pressable>
+            </LinearGradient>
         </View>
+        </LinearGradient>
     )
 }
 
@@ -58,11 +68,27 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#191932'
     },
     title: {
         fontSize: 40,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: '#fff'
     },
+    nextButton: {
+        height: 58,
+         marginHorizontal: 60,
+          borderRadius: 20,
+           justifyContent: 'center',
+            alignItems: 'center',
+             marginTop: 10
+    },
+    nextButtonText: {
+        fontSize: 40,
+        textAlign: 'center',
+        height: 54,
+        width: 268,
+        color: '#fff',
+        backgroundColor: '#242441',
+        borderRadius: 20,
+    }
 })

@@ -10,7 +10,6 @@ export default function ToggleButtons({data, state, handlePress}) {
                 return (
                     <Pressable
                         key={index}
-                        style={{width: 115}}
                         onPressIn={() => handlePress(item.id)}>
                     <Text
                         style={(state.includes(item.id)) ? {...styles.button, ...styles.buttonSelected} : styles.button}>
@@ -29,21 +28,25 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        flexWrap: 'wrap'
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        marginVertical: 30
     },
     button: {
-        paddingVertical: 15,
         marginVertical: 10,
-        marginHorizontal: 5,
-        borderWidth: 2,
-        borderRadius: 15,
-        borderColor: '#fff',
+        marginHorizontal: 8,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 20,
         color: 'white',
         textAlign: 'center',
-        fontSize: 13
+        fontSize: 15,
+        backgroundColor: 'rgba(219, 219, 219, 0.27)',
+        minWidth: 100
     },
     buttonSelected: {
-        borderColor: 'red'
+        backgroundColor: 'rgb(68, 53, 212)',
+        // backgroundColor: 'rgba(60, 47, 182, 0.78)'
     },
     title: {
         fontSize: 40

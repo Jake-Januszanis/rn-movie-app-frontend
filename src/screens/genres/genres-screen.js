@@ -1,6 +1,7 @@
 
+import { LinearGradient } from 'expo-linear-gradient';
 import React, {useState, useEffect} from 'react';
-import { Text, View, StyleSheet, Button, Pressable } from 'react-native';
+import { Text, View, StyleSheet, Pressable } from 'react-native';
 import ToggleButtons from '../../components/toggleButtons';
 
 
@@ -30,7 +31,6 @@ export default function Genres({navigation}){
         {type: 'Anime', id: 16},
         {type: 'Crime', id: 80},
         {type: 'Comedy', id: 35},
-        {type: 'Documentary', id: 99},
         {type: 'Drama', id: 19},
         {type: 'Fantasy', id: 14},
         {type: 'Horror', id: 27},
@@ -38,6 +38,7 @@ export default function Genres({navigation}){
         {type: 'Sci-Fi', id: 878},
         {type: 'Stand Up', id: 10402},
         {type: 'Western', id: 37},
+        {type: 'Documentary', id: 99}
     ]
 
     function handlePress(value) {
@@ -57,23 +58,32 @@ export default function Genres({navigation}){
 
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Genre Selection Screen</Text>
+        <LinearGradient
+            style={styles.container}
+            colors={['#0f0c29', '#24243e']}>
+        <View>
+        
+            <Text style={styles.title}>Genres</Text>
           
             <ToggleButtons 
                 data={genresData} 
                 state={genres} 
                 handlePress={handlePress} 
             />
-        
-            <Button
-                title={'Next'}
-                color={'red'}
-                onPress={() => navigation.navigate('Providers', {
-                    genres: genres
-                })}
-            />
+            <LinearGradient
+                colors={['#8A2387', '#E94057', '#F27121' ]}
+                style={styles.nextButton}
+                >
+            <Pressable
+                onPressIn={() => navigation.navigate('Providers', {
+                genres: genres
+            })}>
+                <Text style={styles.nextButtonText}>Next</Text>
+            </Pressable>
+            </LinearGradient>
+           
         </View>
+         </LinearGradient>
     )
 }
 
@@ -81,9 +91,28 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#191932'
     },
     title: {
-        fontSize: 40
+        fontSize: 60,
+        color: '#fff',
+        textAlign: 'center'
+    },
+    nextButton: {
+        height: 58,
+         marginHorizontal: 60,
+          borderRadius: 20,
+           justifyContent: 'center',
+            alignItems: 'center',
+             marginTop: 10
+    },
+    nextButtonText: {
+        fontSize: 40,
+        textAlign: 'center',
+        height: 54,
+        width: 268,
+        color: '#fff',
+        backgroundColor: '#242441',
+        borderRadius: 20,
     }
 })
+
