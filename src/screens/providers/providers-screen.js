@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
-import ToggleButtons from '../../components/toggleButtons';
+import ToggleButtons from '../../components/buttons/toggleButtons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Providers({navigation, route}) {

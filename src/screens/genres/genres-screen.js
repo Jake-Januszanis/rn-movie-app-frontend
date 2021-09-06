@@ -1,27 +1,11 @@
 
 import { LinearGradient } from 'expo-linear-gradient';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
-import ToggleButtons from '../../components/toggleButtons';
+import ToggleButtons from '../../components/buttons/toggleButtons';
 
 
 export default function Genres({navigation}){
-
-    // useEffect(() => {
-    //     searchForServer()
-    // }, [])
-
-    // const searchForServer = async() => {
-    //     try {
-    //         const response = await fetch('https://fetch-movie-server.herokuapp.com/search')
-    //         const text = await response.text();
-    //         console.log(text)
-    //         return;
-    //     } catch (error) {
-    //         console.error(error)
-    //     }
-    // }
-
 
     const [genres, setGenres] = useState([]);
 
@@ -31,7 +15,7 @@ export default function Genres({navigation}){
         {type: 'Anime', id: 16},
         {type: 'Crime', id: 80},
         {type: 'Comedy', id: 35},
-        {type: 'Drama', id: 19},
+        {type: 'Drama', id: 18},
         {type: 'Fantasy', id: 14},
         {type: 'Horror', id: 27},
         {type: 'Romance', id: 10749},
