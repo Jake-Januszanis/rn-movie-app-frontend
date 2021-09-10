@@ -7,9 +7,8 @@ export default function PreviousBtn({goBack}) {
     return (
         <View>
             <Pressable
-                style={{paddingHorizontal: 10, top: 270}}
                 onPressIn={goBack}>
-                <FontAwesome name="chevron-left" size={70} color="white" />
+                <FontAwesome name="chevron-left" size={50} color="white" />
             </Pressable>
         </View>
     )

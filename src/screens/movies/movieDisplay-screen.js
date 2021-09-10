@@ -6,7 +6,7 @@ import PreviousBtn from '../../components/buttons/previousBtn';
 
 
 import { LinearGradient } from 'expo-linear-gradient';
-import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
+import Carousel, { ParallaxImage, Pagination } from 'react-native-snap-carousel';
 import MovieBottomDisplay from './movieBottomDisplay';
 
 const { width: screenWidth } = Dimensions.get('window');
@@ -22,7 +22,6 @@ export default function MovieDisplay({navigation, route}) {
     }, [])
     const carouselRef = useRef(null);
 
-
     const getMovieData = async() => {
         const url = `https://fetch-movie-server.herokuapp.com/search/${route.params.genres}/${route.params.providers}`
         try {
@@ -34,17 +33,15 @@ export default function MovieDisplay({navigation, route}) {
             console.log(error)
         }}
 
-       function _renderItem ({item, index}, parallaxProps) {
+       function renderItem ({item, index}, parallaxProps) {
             return (
-                <View style={styles.item}>
                     <ParallaxImage
-                        source={{ uri: `https://image.tmdb.org/t/p/original${item.backdrop_path}`}}
+                        source={{ uri: `https://image.tmdb.org/t/p/original${item.backdrop_path}` }}
                         containerStyle={styles.imageContainer}
                         style={styles.image}
                         parallaxFactor={0.4}
                         {...parallaxProps}
                     />
-                </View>
             )
         }
         function testFunction(index) {
@@ -58,70 +55,75 @@ export default function MovieDisplay({navigation, route}) {
           const goBack = () => {
               carouselRef.current.snapToPrev();
           }
-
+  
     return (
         (isLoaded !== true)
         ?
         <Text>Loading Please Wait</Text>
         :
-        
-        <LinearGradient
-            style={styles.container}
-            colors={['#0f0c29', '#302b63', '#24243e']}>
-            
-            <SafeAreaView>
+            <LinearGradient
+                style={{flex: 1,}}
+                colors={['#0f0c29', '#302b63', '#24243e']}>  
+                <View style={{flex: 2}}>
                 <Carousel
-                ref={carouselRef}
-                sliderWidth={screenWidth}
-                sliderHeight={screenWidth}
-                itemWidth={screenWidth - 70}
-                data={data.results}
-                renderItem={_renderItem}
-                hasParallaxImages={true}
-                enableSnap={true}
-                loop={true}
-                onSnapToItem={testFunction}
+                    ref={carouselRef}
+                    sliderWidth={screenWidth}
+                    sliderHeight={screenWidth}
+                    itemWidth={screenWidth - 70}
+                    data={data.results}
+                    renderItem={renderItem}
+                    hasParallaxImages={true}
+                    enableSnap={true}
+                    loop={true}
+                    onSnapToItem={testFunction}
                 />
-                <View style={styles.carouselButtonContainer}>
-                <PreviousBtn goBack={goBack} />
-                <NextBtn goForward={goForward} />
+                    <View style={styles.carouselButtonContainer}>
+                    <PreviousBtn goBack={goBack} />
+                    <Pagination
+                        dotsLength={data.results.length}
+                        activeDotIndex={state}
+                        dotStyle={{
+                            width: 10,
+                            height: 10,
+                            borderRadius: 5,
+                            backgroundColor: 'rgba(255, 255, 255, 0.92)'
+                        }}
+                        inactiveDotOpacity={0.4}
+                        inactiveDotScale={0.6}
+                    />
+                    <NextBtn goForward={goForward} />
+                    </View>
                 </View>
-                <MovieBottomDisplay data={data.results} state={state}/>
-            </SafeAreaView>
-        </LinearGradient>
-        
+                <View style={{flex: 1}}>
+                    <MovieBottomDisplay data={data.results} state={state}/>
+                </View>
+            </LinearGradient> 
+       
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
     },
     carouselButtonContainer: {
-        display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        position: 'absolute'
-    },
-    item: {
-        width: screenWidth - 70,
-        height: screenWidth - 50
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     imageContainer: {
         flex: 1,
-       backgroundColor: '#fff',
-        borderRadius: 8,
+        borderRadius: 20,
+        marginVertical: 45,
     },
     image: {
-        ...StyleSheet.absoluteFillObject,
-        borderRadius: 8,  
-        resizeMode: 'cover'
+        borderRadius: 20,  
+        resizeMode: 'contain',
     },
     title: {
         fontSize: 32,
         color: '#fff',
-        textAlign: 'center'
+        textAlign: 'center',
     },
 })
 

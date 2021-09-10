@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
 
 export default function MovieBottomDisplay({data, state}) {
@@ -28,7 +28,9 @@ export default function MovieBottomDisplay({data, state}) {
 
 
     return (
+    
         <View style={styles.detailsContainer}>
+            <ScrollView>
                     <Text style={styles.title}>{data[state].title}</Text>
                     <View style={styles.rowContainer}>
                         {data[state].genre_ids.splice(0,3).map((item, index) => {
@@ -50,10 +52,14 @@ export default function MovieBottomDisplay({data, state}) {
                             {data[state].vote_average}                
                         </Text>                
                     </View>
-                    <Pressable style={styles.detailsButton}>
+                    <View style={{alignItems: 'center'}}>
+                    <Pressable onPressIn={() => console.log(data[state])} style={styles.detailsButton}>
                         <Text style={styles.detailsButtonText}>See Details</Text>
-                    </Pressable>                
-                </View>
+                    </Pressable>
+                    </View>
+                     </ScrollView>               
+              </View>
+                
     )
 }
 
@@ -61,12 +67,11 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 35,
         color: '#fff',
-        textAlign: 'center'
+        textAlign: 'center',
+        justifyContent: 'center'
     },
     detailsContainer: {
-        paddingTop: 10,
-        backgroundColor: 'transparent',
-        alignItems: 'center'
+        flex: 1,
     },
     rowContainer: {
         display: 'flex',
@@ -93,13 +98,14 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: '#fff',
         borderRadius: 10,
-        width: 200,
-        height: 50,
-        marginTop: 20
+        height: 60,
+        width: 250,
+        marginTop: 20,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     detailsButtonText: {
         fontSize: 30,
-        textAlign: 'center',
-        color: '#fff'
+        color: '#fff',
     }
 })
