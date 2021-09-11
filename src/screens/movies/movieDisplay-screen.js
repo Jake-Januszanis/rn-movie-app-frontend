@@ -4,6 +4,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import MovieBottomDisplay from './movieBottomDisplay';
 import CarouselDisplay from '../../components/carousel/carousel';
+import fetchMovies from '../../api/api'
 
 export default function MovieDisplay({navigation, route}) {
 
@@ -12,29 +13,28 @@ export default function MovieDisplay({navigation, route}) {
     const [data, setData] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false)
 
-    useEffect(() => {
-        getMovieData()
+    useEffect( () => {
+        const getData = async (genres, providers) => {
+            try {
+                const response = await fetchMovies(genres, providers);
+                const list = await response.splice(10)
+                setData(data.concat([list], [response]))
+                setIsLoaded(!isLoaded)
+                console.log(data.length)
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        getData(route.params.genres, route.params.providers)
     }, [])
-
-    const getMovieData = async() => {
-        const url = `https://fetch-movie-server.herokuapp.com/search/${route.params.genres}/${route.params.providers}`
-        try {
-            const response = await fetch(url)
-            const json = await response.json();
-            const list = await json.results.splice(10)
-            setData(data.concat([list], [json.results]))
-            setIsLoaded(!isLoaded)
-        } catch (error) {
-            console.log(error)
-        }}
-
+    
     return (
         (isLoaded !== true)
         ?
         <Text>Loading Please Wait</Text>
         :
         <LinearGradient
-            style={{flex: 1,}}
+            style={styles.container}
             colors={['#0f0c29', '#302b63', '#24243e']}>
                 <CarouselDisplay data={data} page={page} state={state} setState={setState}/> 
                 <View style={{flex: 1}}>
@@ -48,11 +48,6 @@ export default function MovieDisplay({navigation, route}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-    title: {
-        fontSize: 32,
-        color: '#fff',
-        textAlign: 'center',
-    },
+    }
 })
 

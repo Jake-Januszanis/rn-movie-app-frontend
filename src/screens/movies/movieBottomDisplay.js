@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     },
     detailsContainer: {
         flex: 1,
+        paddingHorizontal: 10
     },
     rowContainer: {
         display: 'flex',
