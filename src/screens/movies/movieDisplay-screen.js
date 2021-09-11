@@ -14,7 +14,8 @@ const { width: screenWidth } = Dimensions.get('window');
 export default function MovieDisplay({navigation, route}) {
 
     const [state, setState] = useState(0);
-    const [data, setData] = useState();
+    const [page, setPage] = useState(0)
+    const [data, setData] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
@@ -22,12 +23,14 @@ export default function MovieDisplay({navigation, route}) {
     }, [])
     const carouselRef = useRef(null);
 
+
     const getMovieData = async() => {
         const url = `https://fetch-movie-server.herokuapp.com/search/${route.params.genres}/${route.params.providers}`
         try {
             const response = await fetch(url)
             const json = await response.json();
-            setData(json)
+            const list = await json.results.splice(10)
+            setData(data.concat([list], [json.results]))
             setIsLoaded(!isLoaded)
         } catch (error) {
             console.log(error)
@@ -68,19 +71,17 @@ export default function MovieDisplay({navigation, route}) {
                 <Carousel
                     ref={carouselRef}
                     sliderWidth={screenWidth}
-                    sliderHeight={screenWidth}
                     itemWidth={screenWidth - 70}
-                    data={data.results}
+                    data={data[page]}
                     renderItem={renderItem}
                     hasParallaxImages={true}
                     enableSnap={true}
-                    loop={true}
                     onSnapToItem={testFunction}
                 />
                     <View style={styles.carouselButtonContainer}>
                     <PreviousBtn goBack={goBack} />
                     <Pagination
-                        dotsLength={data.results.length}
+                        dotsLength={data[page].length}
                         activeDotIndex={state}
                         dotStyle={{
                             width: 10,
@@ -95,7 +96,7 @@ export default function MovieDisplay({navigation, route}) {
                     </View>
                 </View>
                 <View style={{flex: 1}}>
-                    <MovieBottomDisplay data={data.results} state={state}/>
+                    <MovieBottomDisplay data={data[page]} state={state}/>
                 </View>
             </LinearGradient> 
        
@@ -117,6 +118,7 @@ const styles = StyleSheet.create({
         marginVertical: 45,
     },
     image: {
+        ...StyleSheet.absoluteFillObject,
         borderRadius: 20,  
         resizeMode: 'contain',
     },

@@ -15,7 +15,6 @@ export default function Providers({navigation, route}) {
         {type: 'Netflix', id: 8},
         {type: 'Amazon', id: 9},
         {type: 'Disney', id: 337},
-        {type: 'HBO', id: 118},
         {type: 'HBO Max', id: 384},
         {type: 'Hulu', id: 15}
     ];

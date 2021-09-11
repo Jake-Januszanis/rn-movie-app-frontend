@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
 
-export default function MovieBottomDisplay({data, state}) {
+export default function MovieBottomDisplay({data, state, page}) {
     
     const genresData = [
         {type: 'Action', id: 28},
