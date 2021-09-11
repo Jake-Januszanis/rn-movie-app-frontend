@@ -3,6 +3,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React, {useState} from 'react';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
 import ToggleChips from '../../components/buttons/ToggleChips';
+import ProgressTrackerGenres from '../../components/progress-tracker/ProgressTrackerGenres';
+
 
 
 export default function Genres({navigation}){
@@ -43,10 +45,10 @@ export default function Genres({navigation}){
 
     return (
         <LinearGradient
-            style={styles.container}
+            style={{flex: 1}}
             colors={['#0f0c29', '#24243e']}>
-        <View>
-        
+            <ProgressTrackerGenres genres={genres} />
+            <View style={styles.container}>
             <Text style={styles.title}>Genres</Text>
           
             <ToggleChips

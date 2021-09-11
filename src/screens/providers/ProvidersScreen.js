@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import ToggleChips from '../../components/buttons/ToggleChips';
+import ProgressTracker from '../../components/progress-tracker/ProgressTrackerGenres';
+import ProgressTrackerProvider from '../../components/progress-tracker/ProgressTrackerProvider';
 
 export default function Providers({navigation, route}) {
 
@@ -37,9 +39,10 @@ export default function Providers({navigation, route}) {
 
     return (
         <LinearGradient
-            style={styles.container}
+            style={{flex: 1}}
             colors={['#0f0c29', '#24243e']}>
-        <View>
+            <ProgressTrackerProvider providers={providers} />
+        <View style={styles.container}>
             <Text style={styles.title}>Streaming Services</Text>
             <ToggleChips 
                 data={providerData} 
