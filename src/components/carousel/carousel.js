@@ -1,8 +1,8 @@
 import React, {useRef} from 'react';
 import {View, Dimensions, StyleSheet} from 'react-native'
 
-import NextBtn from '../buttons/nextBtn';
-import PreviousBtn from '../buttons/previousBtn';
+import NextButton from '../buttons/NextButton';
+import PreviousButton from '../buttons/PreviousButton';
 
 
 import Carousel, { ParallaxImage, Pagination } from 'react-native-snap-carousel';
@@ -34,21 +34,21 @@ export default function CarouselDisplay({data, page, state, setState}) {
                     parallaxFactor={0.4}
                     {...parallaxProps}
                 />
-            )}
-    return (
-        <View style={{flex: 2}}>
-        <Carousel
-            ref={carouselRef}
-            sliderWidth={screenWidth}
-            itemWidth={screenWidth - 70}
-            data={data[page]}
-            renderItem={renderItem}
-            hasParallaxImages={true}
-            enableSnap={true}
-            onSnapToItem={testFunction}        
-        />
-        <View style={styles.carouselButtonContainer}>
-                    <PreviousBtn goBack={goBack} />
+                )}
+        return (
+            <View style={{flex: 2}}>
+                <Carousel
+                    ref={carouselRef}
+                    sliderWidth={screenWidth}
+                    itemWidth={screenWidth - 70}
+                    data={data[page]}
+                    renderItem={renderItem}
+                    hasParallaxImages={true}
+                    enableSnap={true}
+                    onSnapToItem={testFunction}        
+                />
+            <View style={styles.carouselButtonContainer}>
+                    <PreviousButton goBack={goBack} />
                     <Pagination
                         dotsLength={data[page].length}
                         activeDotIndex={state}
@@ -61,9 +61,9 @@ export default function CarouselDisplay({data, page, state, setState}) {
                         inactiveDotOpacity={0.4}
                         inactiveDotScale={0.6}
                     />
-                    <NextBtn goForward={goForward} />
-                    </View>
-                    </View>
+                    <NextButton goForward={goForward} />
+            </View>
+            </View>
     )
 }
 

@@ -3,12 +3,12 @@ import { View, Pressable } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'; 
 
 
-export default function NextBtn({goForward}) {
+export default function PreviousButton({goBack}) {
     return (
         <View>
             <Pressable
-                onPressIn={goForward}>
-                <FontAwesome name="chevron-right" size={50} color="white" />
+                onPressIn={goBack}>
+                <FontAwesome name="chevron-left" size={50} color="white" />
             </Pressable>
         </View>
     )

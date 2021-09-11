@@ -2,7 +2,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, {useState} from 'react';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
-import ToggleButtons from '../../components/buttons/toggleButtons';
+import ToggleChips from '../../components/buttons/ToggleChips';
 
 
 export default function Genres({navigation}){
@@ -49,7 +49,7 @@ export default function Genres({navigation}){
         
             <Text style={styles.title}>Genres</Text>
           
-            <ToggleButtons 
+            <ToggleChips
                 data={genresData} 
                 state={genres} 
                 handlePress={handlePress} 

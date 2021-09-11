@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 
-export default function ToggleButtons({data, state, handlePress}) {
+export default function ToggleChips({data, state, handlePress}) {
 
     return(
         <View style={styles.btnContainer}>
@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
     },
     buttonSelected: {
         backgroundColor: 'rgb(68, 53, 212)',
-        // backgroundColor: 'rgba(60, 47, 182, 0.78)'
     },
     title: {
         fontSize: 40

@@ -2,10 +2,10 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from '../screens/home/home-screen'
-import Genres from '../screens/genres/genres-screen'
-import Providers from '../screens/providers/providers-screen'
-import MovieDisplay from '../screens/movies/movieDisplay-screen'
+import Home from '../screens/home/HomeScreen'
+import Genres from '../screens/genres/GenresScreen'
+import Providers from '../screens/providers/ProvidersScreen'
+import MovieDisplay from '../screens/movies/MovieScreen'
 
 
 

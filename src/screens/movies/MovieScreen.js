@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
-import MovieBottomDisplay from './movieBottomDisplay';
-import CarouselDisplay from '../../components/carousel/carousel';
+import MovieDetails from './MovieScreenDetails';
+import CarouselDisplay from '../../components/carousel/Carousel';
 import fetchMovies from '../../api/api'
 
 export default function MovieDisplay({navigation, route}) {
@@ -38,7 +38,7 @@ export default function MovieDisplay({navigation, route}) {
             colors={['#0f0c29', '#302b63', '#24243e']}>
                 <CarouselDisplay data={data} page={page} state={state} setState={setState}/> 
                 <View style={{flex: 1}}>
-                    <MovieBottomDisplay data={data[page]} state={state}/>
+                    <MovieDetails data={data[page]} state={state}/>
                 </View>
         </LinearGradient> 
        

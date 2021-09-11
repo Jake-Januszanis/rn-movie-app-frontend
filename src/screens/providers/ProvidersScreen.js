@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
-import ToggleButtons from '../../components/buttons/toggleButtons';
 import { LinearGradient } from 'expo-linear-gradient';
+import ToggleChips from '../../components/buttons/ToggleChips';
 
 export default function Providers({navigation, route}) {
 
@@ -41,7 +41,7 @@ export default function Providers({navigation, route}) {
             colors={['#0f0c29', '#24243e']}>
         <View>
             <Text style={styles.title}>Streaming Services</Text>
-            <ToggleButtons 
+            <ToggleChips 
                 data={providerData} 
                 state={providers} 
                 handlePress={handlePress} 
