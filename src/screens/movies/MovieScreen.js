@@ -20,7 +20,7 @@ export default function MovieDisplay({navigation, route}) {
                 const list = await response.splice(10)
                 setData(data.concat([list], [response]))
                 setIsLoaded(!isLoaded)
-                console.log(data.length)
+                console.log('Component rerendering')
             } catch(error) {
                 console.log(error)
             }
@@ -37,9 +37,7 @@ export default function MovieDisplay({navigation, route}) {
             style={styles.container}
             colors={['#0f0c29', '#302b63', '#24243e']}>
                 <CarouselDisplay data={data} page={page} state={state} setState={setState}/> 
-                <View style={{flex: 1}}>
-                    <MovieDetails data={data[page]} state={state}/>
-                </View>
+                <MovieDetails data={data[page]} state={state}/>
         </LinearGradient> 
        
     )

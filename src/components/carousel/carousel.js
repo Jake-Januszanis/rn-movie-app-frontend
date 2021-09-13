@@ -7,10 +7,10 @@ import PreviousButton from '../buttons/PreviousButton';
 
 import Carousel, { ParallaxImage, Pagination } from 'react-native-snap-carousel';
 
+const { width: screenWidth } = Dimensions.get('window');
 
 export default function CarouselDisplay({data, page, state, setState}) {
     const carouselRef = useRef(null);
-    const { width: screenWidth } = Dimensions.get('window');
 
     function testFunction(index) {
         setState(index)
@@ -27,25 +27,30 @@ export default function CarouselDisplay({data, page, state, setState}) {
 
     function renderItem ({item, index}, parallaxProps) {
         return (
+            <View style={styles.item}>
                 <ParallaxImage
-                    source={{ uri: `https://image.tmdb.org/t/p/original${item.backdrop_path}` }}
+                    source={{ uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }}
                     containerStyle={styles.imageContainer}
                     style={styles.image}
                     parallaxFactor={0.4}
+                    resizeMode={'contain'}
                     {...parallaxProps}
                 />
+            </View>
                 )}
         return (
             <View style={{flex: 2}}>
                 <Carousel
                     ref={carouselRef}
                     sliderWidth={screenWidth}
-                    itemWidth={screenWidth - 70}
+                    sliderHeight={screenWidth} 
+                    itemWidth={screenWidth - 110}
                     data={data[page]}
                     renderItem={renderItem}
                     hasParallaxImages={true}
                     enableSnap={true}
-                    onSnapToItem={testFunction}        
+                    onSnapToItem={testFunction}
+    
                 />
             <View style={styles.carouselButtonContainer}>
                     <PreviousButton goBack={goBack} />
@@ -71,13 +76,17 @@ const styles = StyleSheet.create({
     imageContainer: {
         flex: 1,
         borderRadius: 20,
-        marginVertical: 45,
+        marginBottom: Platform.select({ios: 0, android: 1}),
+        marginTop: 30,
     },
     image: {
-        ...StyleSheet.absoluteFillObject,
-        borderRadius: 20,  
         resizeMode: 'contain',
+        borderWidth: 6
     },
+    item: {
+        width: screenWidth - 110,
+        height: screenWidth,
+      },
     carouselButtonContainer: {
         flexDirection: 'row',
         justifyContent: 'center',

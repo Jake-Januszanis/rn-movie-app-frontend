@@ -23,7 +23,8 @@ export default function Home({ navigation }) {
             <StatusBar></StatusBar>
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>FLINGO</Text>
-                <Text style={styles.subTitle}>Not sure what to watch next? Dont worry we're here to help!</Text>
+                <Text style={styles.subTitle}>Not sure what to watch next?</Text>
+                <Text style={styles.subTitle}>Dont worry we're here to help!</Text>
             </View>
             <Image 
                 style={styles.image}
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
         paddingBottom: 10
     },
     subTitle: {
-        fontSize: 22,
+        fontSize: 23,
         textAlign: 'center',
         color: '#fff'
     },
