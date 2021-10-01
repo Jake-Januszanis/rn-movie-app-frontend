@@ -4,20 +4,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 
 
-export default function MovieDetailsModal({modalVisible, setModalVisible, data, state}) {
-
-
-
-
+export default function MovieDetailsModal({isModalOpen, setIsModalOpen, data, state}) {
 
     return (
    
         <Modal
         style={styles.modalContainer}
         animationType="slide"
-        visible={modalVisible}
-        >
-            
+        visible={isModalOpen}>
             <LinearGradient
                 style={styles.container}
                 colors={['#0f0c29', '#302b63', '#24243e']}>
@@ -44,7 +38,7 @@ export default function MovieDetailsModal({modalVisible, setModalVisible, data, 
                         </View>
                         </View>
               
-                        <Pressable onPressIn={() => setModalVisible(false)}>
+                        <Pressable onPressIn={() => setIsModalOpen(false)}>
                         <Text style={{fontSize: 30, color: 'white'}}>Close</Text>
                     </Pressable>
             </LinearGradient>

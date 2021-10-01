@@ -2,23 +2,24 @@ import React, {useState, useEffect} from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
-import MovieDetails from './MovieScreenDetails';
-import CarouselDisplay from '../../components/carousel/Carousel';
+import MovieDetails from './MovieScreenDetailsPreview';
+import CarouselDisplay from '../../components/carousel/carousel';
+import MovieDetailsModal from '../../components/modal/MovieDetailsModal'
 import fetchMovies from '../../api/api'
 
 export default function MovieDisplay({navigation, route}) {
 
     const [state, setState] = useState(0);
-    const [page, setPage] = useState(0)
-    const [data, setData] = useState([]);
+    const [data, setData] = useState();
     const [isLoaded, setIsLoaded] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect( () => {
         const getData = async (genres, providers) => {
             try {
                 const response = await fetchMovies(genres, providers);
                 const list = await response.splice(10)
-                setData(data.concat([list], [response]))
+                setData(list)
                 setIsLoaded(!isLoaded)
                 console.log('Component rerendering')
             } catch(error) {
@@ -36,8 +37,9 @@ export default function MovieDisplay({navigation, route}) {
         <LinearGradient
             style={styles.container}
             colors={['#0f0c29', '#302b63', '#24243e']}>
-                <CarouselDisplay data={data} page={page} state={state} setState={setState}/> 
-                <MovieDetails data={data[page]} state={state}/>
+                <CarouselDisplay data={data} state={state} setState={setState}/> 
+                <MovieDetails data={data} state={state} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
+                <MovieDetailsModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} state={state} data={data} />
         </LinearGradient> 
        
     )

@@ -9,7 +9,7 @@ import Carousel, { ParallaxImage, Pagination } from 'react-native-snap-carousel'
 
 const { width: screenWidth } = Dimensions.get('window');
 
-export default function CarouselDisplay({data, page, state, setState}) {
+export default function CarouselDisplay({data, state, setState}) {
     const carouselRef = useRef(null);
 
     function testFunction(index) {
@@ -45,7 +45,7 @@ export default function CarouselDisplay({data, page, state, setState}) {
                     sliderWidth={screenWidth}
                     sliderHeight={screenWidth} 
                     itemWidth={screenWidth - 110}
-                    data={data[page]}
+                    data={data}
                     renderItem={renderItem}
                     hasParallaxImages={true}
                     enableSnap={true}
@@ -55,7 +55,7 @@ export default function CarouselDisplay({data, page, state, setState}) {
             <View style={styles.carouselButtonContainer}>
                     <PreviousButton goBack={goBack} />
                     <Pagination
-                        dotsLength={data[page].length}
+                        dotsLength={data.length}
                         activeDotIndex={state}
                         dotStyle={{
                             width: 10,

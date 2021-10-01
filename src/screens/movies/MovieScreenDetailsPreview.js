@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
 
-export default function MovieDetails({data, state, page}) {
+export default function MovieDetails({data, state, setIsModalOpen}) {
     
     const genresData = [
         {type: 'Action', id: 28},
@@ -53,7 +53,7 @@ export default function MovieDetails({data, state, page}) {
                         </Text>                
                     </View>
                     <View style={{alignItems: 'center'}}>
-                    <Pressable onPressIn={() => console.log(data[state])} style={styles.detailsButton}>
+                    <Pressable onPressIn={() => setIsModalOpen(true)} style={styles.detailsButton}>
                         <Text style={styles.detailsButtonText}>See Details</Text>
                     </Pressable>
                     </View>
