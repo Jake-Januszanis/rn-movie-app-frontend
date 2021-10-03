@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
-import MovieDetails from './MovieScreenDetailsPreview';
+import MovieScreenDetailsPreview from './MovieScreenDetailsPreview';
 import CarouselDisplay from '../../components/carousel/carousel';
 import MovieDetailsModal from '../../components/modal/MovieDetailsModal'
 import fetchMovies from '../../api/api'
@@ -38,8 +38,13 @@ export default function MovieDisplay({navigation, route}) {
             style={styles.container}
             colors={['#0f0c29', '#302b63', '#24243e']}>
                 <CarouselDisplay data={data} state={state} setState={setState}/> 
-                <MovieDetails data={data} state={state} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
-                <MovieDetailsModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} state={state} data={data} />
+                <MovieScreenDetailsPreview data={data} state={state} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
+                {(isModalOpen) 
+                ?
+                <MovieDetailsModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} data={data[state]} />
+                :
+                null
+                }
         </LinearGradient> 
        
     )

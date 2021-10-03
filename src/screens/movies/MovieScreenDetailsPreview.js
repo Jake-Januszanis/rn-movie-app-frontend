@@ -2,8 +2,9 @@ import React from 'react';
 import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
 
-export default function MovieDetails({data, state, setIsModalOpen}) {
+export default function MovieScreenDetailsPreview({data, state, setIsModalOpen}) {
     
+
     const genresData = [
         {type: 'Action', id: 28},
         {type: 'Adventure', id: 12},
@@ -26,6 +27,8 @@ export default function MovieDetails({data, state, setIsModalOpen}) {
         {type: 'TV Movie', id: 10770}
     ]
 
+ 
+    
 
     return (
     
@@ -33,12 +36,11 @@ export default function MovieDetails({data, state, setIsModalOpen}) {
             <ScrollView>
                     <Text style={styles.title}>{data[state].title}</Text>
                     <View style={styles.rowContainer}>
-                        {data[state].genre_ids.splice(0,3).map((item, index) => {
-                           const genre = genresData.find(obj => obj.id === item)
+                        {data[state].genre_ids.slice(0,3).map((item, index) => {
+                         const genre = genresData.find(obj => obj.id === item)
                                  return <Text key={index} style={styles.genres}>                 
                                             {genre.type}                  
-                                        </Text>   
-                                                                 
+                                        </Text>                                              
                         })}
                     </View>
                     <View style={styles.rowContainer}>

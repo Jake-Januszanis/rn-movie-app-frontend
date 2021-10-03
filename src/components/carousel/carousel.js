@@ -14,14 +14,19 @@ export default function CarouselDisplay({data, state, setState}) {
 
     function testFunction(index) {
         setState(index)
+        // console.log(data[index].genre_ids)
     }
 
     const goForward = () => {
         carouselRef.current.snapToNext();
+        const newState = state + 1
+        setState(newState)
       };
     
     const goBack = () => {
         carouselRef.current.snapToPrev();
+        const newState = state - 1
+        setState(newState)
       }
 
 
@@ -50,7 +55,6 @@ export default function CarouselDisplay({data, state, setState}) {
                     hasParallaxImages={true}
                     enableSnap={true}
                     onSnapToItem={testFunction}
-    
                 />
             <View style={styles.carouselButtonContainer}>
                     <PreviousButton goBack={goBack} />
